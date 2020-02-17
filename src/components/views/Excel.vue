@@ -1,35 +1,108 @@
 <template>
-  <div>
-    <div id="app" ref="spreadsheet"></div>
-    <div><input type="button" value="Add new row" @click="() => spreadsheet.insertRow()" /></div>
-  </div>
+  <section class="content">
+    <div class="row center-block">
+      <h1 class="text-center">Data Mahasiswa</h1>
+      <div id="app" ref="spreadsheet"></div>
+    </div>
+  </section>
 </template>
 
 <script>
 import jexcel from 'jexcel'
 import 'jexcel/dist/jexcel.css'
-var data = [
-  ['Jazz', 'Honda', '2019-02-12', '', true, '$ 2.000,00', '#777700'],
-  ['Civic', 'Honda', '2018-07-11', '', true, '$ 4.000,01', '#007777']
-]
+import axios from 'axios'
+var data = []
+
+var update = function (obj, cel, y, x, val) {
+  var tmpData = data[x]
+  tmpData[y] = val
+
+  axios({
+    method: 'put',
+    url: 'https://dog.ceo/api/breeds/list/all',
+    data: {
+      id: tmpData[0],
+      nrp: tmpData[1],
+      nama: tmpData[2],
+      angkatan: tmpData[3],
+      tgl_lahir: tmpData[4],
+      photo: tmpData[5],
+      aktif: tmpData[6]
+    //   manfaat: tmpData[7],
+    //   waktu: tmpData[8],
+    //   bukti: tmpData[9],
+    //   tahun: tmpData[10]
+    }
+  })
+  .then((response) => {
+    console.log(response.data)
+  })
+}
+
+var deleterow = function(obj, x, y) {
+  axios({
+    method: 'delete',
+    url: 'https://dog.ceo/api/breeds/list/all' + (data[x][0])}).then((response) => {
+      console.log(response.data)
+    })
+  data.splice(x, 1)
+}
+
+var insertrow = function(obj, x, y, val) {
+  data.push(['', '', '', '', '', ''])
+  axios({
+    method: 'post',
+    url: 'https://dog.ceo/api/breeds/list/all',
+    data: {
+    }
+  })
+  .then((response) => {
+    console.log(response.data)
+    x = x + 1
+    console.log(x)
+    data[x][0] = response.data.id
+  })
+}
+
 var options = {
   data: data,
-  allowToolbar: true,
+  onchange: update,
+  oninsertrow: insertrow,
+  ondeleterow: deleterow,
+  defaultColWidth: 100,
+  tableOverflow: true,
+  tableWidth: '500px',
+  allowToolbar: false,
+  allowInsertRow: true,
+  allowDeleteRow: true,
   columns: [
-    { type: 'text', title: 'Car', width: '120px' },
-    { type: 'dropdown', title: 'Make', width: '250px', source: [ 'Alfa Romeo', 'Audi', 'Bmw' ] },
-    { type: 'calendar', title: 'Available', width: '250px' },
+    { type: 'hidden', title: 'ID', width: '80px' },
+    { type: 'text', title: 'NRP', width: '200px' },
+    { type: 'text', title: 'Nama', width: '250px' },
+    { type: 'text', title: 'Angkatan', width: '100px' },
+    { type: 'text', title: 'Tanggal Lahir', width: '120px' },
     { type: 'image', title: 'Photo', width: '120px' },
-    { type: 'checkbox', title: 'Stock', width: '80px' },
-    { type: 'numeric', title: 'Price', width: '100px', mask: '$ #.##,00', decimal: ',' },
-    { type: 'color', width: '100px', render: 'square' }
+    { type: 'checkbox', title: 'Aktif', width: '80px' }
   ]
 }
+
 export default {
   name: 'App',
+  methods: {
+    readData () {
+      axios.get('https://dog.ceo/api/breeds/list/all')
+      .then((response) => {
+        var objectArray = (response.data.data)
+        objectArray.forEach(element => {
+          data.push(Object.values(element))
+        })
+        let spreadsheet = jexcel(this.$el, options)
+        Object.assign(this, { spreadsheet })
+      })
+    }
+  },
   mounted: function () {
-    let spreadsheet = jexcel(this.$el, options)
-    Object.assign(this, { spreadsheet })
+    this.readData()
   }
 }
 </script>
