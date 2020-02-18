@@ -11,6 +11,7 @@ import AccessView from './components/views/Access.vue'
 import ServerView from './components/views/Server.vue'
 import ReposView from './components/views/Repos.vue'
 import ExcelView from './components/views/Excel.vue'
+import DataView from './components/views/Data.vue'
 
 // Routes
 const routes = [
@@ -38,6 +39,11 @@ const routes = [
         component: ExcelView,
         name: 'Excel',
         meta: {description: 'Excel in CoPilot'}
+      }, {
+        path: 'data',
+        component: DataView,
+        name: 'Data',
+        meta: {description: 'Data in CoPilot'}
       }, {
         path: 'tasks',
         component: TasksView,

@@ -19,7 +19,7 @@ var update = function (obj, cel, y, x, val) {
 
   axios({
     method: 'put',
-    url: 'https://dog.ceo/api/breeds/list/all',
+    url: '',
     data: {
       id: tmpData[0],
       nrp: tmpData[1],
@@ -28,10 +28,6 @@ var update = function (obj, cel, y, x, val) {
       tgl_lahir: tmpData[4],
       photo: tmpData[5],
       aktif: tmpData[6]
-    //   manfaat: tmpData[7],
-    //   waktu: tmpData[8],
-    //   bukti: tmpData[9],
-    //   tahun: tmpData[10]
     }
   })
   .then((response) => {
@@ -42,7 +38,7 @@ var update = function (obj, cel, y, x, val) {
 var deleterow = function(obj, x, y) {
   axios({
     method: 'delete',
-    url: 'https://dog.ceo/api/breeds/list/all' + (data[x][0])}).then((response) => {
+    url: '' + (data[x][0])}).then((response) => {
       console.log(response.data)
     })
   data.splice(x, 1)
@@ -52,7 +48,7 @@ var insertrow = function(obj, x, y, val) {
   data.push(['', '', '', '', '', ''])
   axios({
     method: 'post',
-    url: 'https://dog.ceo/api/breeds/list/all',
+    url: '',
     data: {
     }
   })
@@ -76,7 +72,6 @@ var options = {
   allowInsertRow: true,
   allowDeleteRow: true,
   columns: [
-    { type: 'hidden', title: 'ID', width: '80px' },
     { type: 'text', title: 'NRP', width: '200px' },
     { type: 'text', title: 'Nama', width: '250px' },
     { type: 'text', title: 'Angkatan', width: '100px' },
@@ -90,7 +85,7 @@ export default {
   name: 'App',
   methods: {
     readData () {
-      axios.get('https://dog.ceo/api/breeds/list/all')
+      axios.get('')
       .then((response) => {
         var objectArray = (response.data.data)
         objectArray.forEach(element => {
