@@ -1,0 +1,22 @@
+{
+  "siswa": [
+    {
+      "id": 1,
+      "nrp": "05111740000140",
+      "nama": "Zaky Thariq",
+      "angkatan": "2017",
+      "tgl_lahir": "1999-06-04",
+      "photo": "",
+      "aktif": true
+    },
+    {
+      "id": 2,
+      "nrp": "05111740000141",
+      "nama": "Aurelia",
+      "angkatan": "2017",
+      "tgl_lahir": "1999-07-05",
+      "photo": "",
+      "aktif": true
+    },
+  ]
+}
