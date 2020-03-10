@@ -11,12 +11,35 @@
     },
     {
       "id": 2,
-      "nrp": "05111740000141",
-      "nama": "Aurelia",
+      "nrp": "0511174000000",
+      "nama": "Bayu Novaldi",
       "angkatan": "2017",
-      "tgl_lahir": "1999-07-05",
-      "photo": "",
+      "tgl_lahir": "2018-06-19 00:00:00",
       "aktif": true
     },
+    {
+      "id": 3,
+      "nrp": "05111740000123",
+      "nama": "Iqbal",
+      "angkatan": "2017",
+      "tgl_lahir": "2018-05-25 00:00:00",
+      "aktif": true
+    },
+    {
+      "id": 5,
+      "nrp": "05111740000077",
+      "nama": "Ahmad",
+      "angkatan": "2017",
+      "tgl_lahir": "2016-09-14 00:00:00",
+      "aktif": true
+    },
+    {
+      "id": 6,
+      "nrp": "051117400000133",
+      "nama": "Yahya",
+      "angkatan": "2017",
+      "tgl_lahir": "2014-09-11 00:00:00",
+      "aktif": true
+    }
   ]
 }

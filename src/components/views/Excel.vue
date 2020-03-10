@@ -16,26 +16,26 @@ import axios from 'axios'
 var data = []
 
 var update = function (obj, cel, y, x, val) {
-  var tmpData = data[x]
-  tmpData[y] = val
-
+  x = parseInt(x)
+  y = parseInt(y)
   axios({
     method: 'get',
-    url: ('http://localhost:3000/siswa').then(response => {
-      var index = Object.values(response.data[x])
-      index[y] = val
-      console.log(index)
-      axios.put('http://localhost:3000/siswa/' + index[0], {
-        id: tmpData[0],
-        nrp: tmpData[1],
-        nama: tmpData[2],
-        angkatan: tmpData[3],
-        tgl_lahir: tmpData[4],
-        photo: tmpData[5],
-        aktif: tmpData[6]
-      }).then(response => {
-        console.log(response.data)
-      })
+    url: 'http://localhost:3000/siswa/'
+  }).then(response => {
+    var data = Object.values(response.data[x])
+    console.log(response.data)
+    data[y] = val
+    var tmpData = data
+    axios.put('http://localhost:3000/siswa/' + tmpData[0], {
+      id: tmpData[0],
+      nrp: tmpData[1],
+      nama: tmpData[2],
+      angkatan: tmpData[3],
+      tgl_lahir: tmpData[4],
+      photo: tmpData[5],
+      aktif: tmpData[6]
+    }).then(response => {
+      // console.log(response.data)
     })
   })
 }
@@ -43,35 +43,28 @@ var update = function (obj, cel, y, x, val) {
 var deleterow = function(obj, x) {
   axios({
     method: 'get',
-    url: ('http://localhost:3000/siswa').then(response => {
-      var index = Object.values(response.data[x])
-      console.log(x)
-      axios.delete('http://localhost:3000/mahasiswa/' + index[0])
-    })
+    url: 'http://localhost:3000/siswa/'
+  }).then(response => {
+    var index = Object.values(response.data[x])
+    console.log(x)
+    axios.delete('http://localhost:3000/siswa/' + index[0])
   })
 }
 
-// var insertrow = function(obj, x, y, val) {
-//   data.push(['', '', '', '', '', ''])
-//   axios({
-//     method: 'post',
-//     url: 'http://localhost:3000/siswa',
-//     data: {
-//     }
-//   })
-//   .then((response) => {
-//     console.log(response.data)
-//     x = x + 1
-//     console.log(x)
-//     data[x][0] = response.data.id
-//   })
-// }
+var newRow = function() {
+  axios({
+    method: 'post',
+    url: 'http://localhost:3000/siswa/'
+  }).then(response => {
+    console.log(response.data)
+  })
+}
 
 var options = {
   data: data,
-  url: 'http://localhost:3000/siswa',
+  url: 'http://localhost:3000/siswa/',
   onchange: update,
-  oninsertrow: this.newRow,
+  oninsertrow: newRow,
   ondeleterow: deleterow,
   defaultColWidth: 100,
   tableOverflow: true,
@@ -107,15 +100,11 @@ export default {
     }
   },
   mounted: function () {
-    let spreadsheet = jexcel(this.$el, options)
-    Object.assign(this, { spreadsheet })
-  },
-  methods: {
-    newRow() {
-      axios.post('http://localhost:3000/siswa', this.form).then(res => {
-        console.log(res.data)
-      })
-    }
+    axios.get('http://localhost:3000/siswa/').then(response => {
+      console.log(response.data)
+      let spreadsheet = jexcel(this.$el, options)
+      Object.assign(this, { spreadsheet })
+    })
   }
 }
 </script>
