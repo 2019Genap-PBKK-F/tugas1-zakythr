@@ -7,22 +7,34 @@
         <span class="page">Dashboard</span>
       </a>
     </router-link>
-    <router-link tag="li" class="pageLink" to="/tables">
-      <a>
-        <i class="fa fa-table"></i>
-        <span class="page">Tables</span>
-      </a>
-    </router-link>
     <router-link tag="li" class="pageLink" to="/excel">
       <a>
         <i class="fa fa-list-alt"></i>
         <span class="page">Excel</span>
       </a>
     </router-link>
-    <router-link tag="li" class="pageLink" to="/data">
+    <router-link tag="li" class="pageLink" to="/datadasar">
       <a>
-        <i class="fa fa-list"></i>
-        <span class="page">Data</span>
+        <i class="fa fa-list-alt"></i>
+        <span class="page">Data Dasar</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/kategoriunit">
+      <a>
+        <i class="fa fa-list-alt"></i>
+        <span class="page">Kategori Unit</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/unit">
+      <a>
+        <i class="fa fa-list-alt"></i>
+        <span class="page">Unit</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/capaian_unit">
+      <a>
+        <i class="fa fa-list-alt"></i>
+        <span class="page">Capaian Unit</span>
       </a>
     </router-link>
 

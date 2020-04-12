@@ -40,6 +40,22 @@
       "angkatan": "2017",
       "tgl_lahir": "2014-09-11 00:00:00",
       "aktif": true
+    },
+    {
+      "id": 7,
+      "nrp": "05111740000123",
+      "nama": "Jeje",
+      "angkatan": "2017",
+      "tgl_lahir": "2015-07-06 00:00:00",
+      "aktif": true
+    },
+    {
+      "id": 8,
+      "nrp": "05111940000122",
+      "nama": "Farah",
+      "angkatan": "2019",
+      "tgl_lahir": "2018-07-24 00:00:00",
+      "aktif": true
     }
   ]
 }

@@ -4,14 +4,16 @@ import NotFoundView from './components/404.vue'
 
 // Import Views - Dash
 import DashboardView from './components/views/Dashboard.vue'
-import TablesView from './components/views/Tables.vue'
 import TasksView from './components/views/Tasks.vue'
 import SettingView from './components/views/Setting.vue'
 import AccessView from './components/views/Access.vue'
 import ServerView from './components/views/Server.vue'
 import ReposView from './components/views/Repos.vue'
 import ExcelView from './components/views/Excel.vue'
-import DataView from './components/views/Data.vue'
+import UnitView from './components/views/Unit.vue'
+import KategoriUnitView from './components/views/KategoriUnit.vue'
+import DataDasarView from './components/views/DataDasar.vue'
+import CapaianUnitView from './components/views/Capaian_Unit.vue'
 
 // Routes
 const routes = [
@@ -30,20 +32,30 @@ const routes = [
         name: 'Dashboard',
         meta: {description: 'Overview of environment'}
       }, {
-        path: 'tables',
-        component: TablesView,
-        name: 'Tables',
-        meta: {description: 'Simple and advance table in CoPilot'}
-      }, {
         path: 'excel',
         component: ExcelView,
         name: 'Excel',
         meta: {description: 'Excel in CoPilot'}
       }, {
-        path: 'data',
-        component: DataView,
-        name: 'Data',
-        meta: {description: 'Data in CoPilot'}
+        path: 'unit',
+        component: UnitView,
+        name: 'Unit',
+        meta: {description: 'Unit in CoPilot'}
+      }, {
+        path: 'capaian_unit',
+        component: CapaianUnitView,
+        name: 'Capaian_Unit',
+        meta: {description: 'Capaian Unit in CoPilot'}
+      }, {
+        path: 'kategoriunit',
+        component: KategoriUnitView,
+        name: 'KategoriUnit',
+        meta: {description: 'Kategori Unit in CoPilot'}
+      }, {
+        path: 'datadasar',
+        component: DataDasarView,
+        name: 'DataDasar',
+        meta: {description: 'Data Dasar Unit in CoPilot'}
       }, {
         path: 'tasks',
         component: TasksView,

@@ -1,7 +1,7 @@
 <template>
   <section class="content">
     <div class="row center-block">
-      <h1 class="text-center">Data Mahasiswa</h1>
+      <h1 class="text-center">Unit</h1>
       <input type="button" value="Add New Row" @click="() => spreadsheet.insertRow()" />
       <input type="button" value="Delete Selected Row" @click="() => spreadsheet.deleteRow()" />
       <div id="spreadsheet"></div>
@@ -19,20 +19,16 @@ var update = function (obj, cel, y, x, val) {
   y = parseInt(y)
   axios({
     method: 'get',
-    url: 'http://localhost:8026/api/mahasiswa/'
+    url: 'http://localhost:8026/api/Unit/'
   }).then(response => {
     var data = Object.values(response.data[x])
     console.log(response.data)
     data[y] = val
     var tmpData = data
-    axios.put('http://localhost:8026/api/mahasiswa/' + tmpData[0], {
+    axios.put('http://localhost:8026/api/Unit/' + tmpData[0], {
       id: tmpData[0],
-      nrp: tmpData[1],
-      nama: tmpData[2],
-      angkatan: tmpData[3],
-      tgl_lahir: tmpData[4],
-      photo: tmpData[5],
-      aktif: tmpData[6]
+      KategoriUnit_id: tmpData[1],
+      nama: tmpData[2]
     }).then(response => {
       // console.log(response.data)
     })
@@ -42,18 +38,18 @@ var update = function (obj, cel, y, x, val) {
 var deleterow = function(obj, x) {
   axios({
     method: 'get',
-    url: 'http://localhost:8026/api/mahasiswa/'
+    url: 'http://localhost:8026/api/Unit/'
   }).then(response => {
     var index = Object.values(response.data[x])
     console.log(x)
-    axios.delete('http://localhost:8026/api/mahasiswa/' + index[0])
+    axios.delete('http://localhost:8026/api/Unit/' + index[0])
   })
 }
 
 var newRow = function() {
   axios({
     method: 'post',
-    url: 'http://localhost:8026/api/mahasiswa/'
+    url: 'http://localhost:8026/api/Unit/'
   }).then(response => {
     console.log(response.data)
   })
@@ -103,7 +99,7 @@ export default {
   // },
   methods: {
     load() {
-      axios.get('http://localhost:8026/api/mahasiswa/').then(response => {
+      axios.get('http://localhost:8026/api/Unit/').then(response => {
         console.log(response.data)
         var options = {
           data: response.data,
@@ -112,13 +108,9 @@ export default {
           ondeleterow: deleterow,
           allowToolbar: true,
           columns: [
-            { type: 'hidden', title: 'ID', width: '80px' },
-            { type: 'text', title: 'NRP', width: '200px' },
-            { type: 'text', title: 'Nama', width: '250px' },
-            { type: 'text', title: 'Angkatan', width: '100px' },
-            { type: 'calendar', title: 'Tanggal Lahir', width: '180px' },
-            { type: 'image', title: 'Photo', width: '120px' },
-            { type: 'checkbox', title: 'Aktif', width: '80px' }
+            { type: 'hidden', title: 'ID', width: '100px' },
+            { type: 'text', title: 'Kategori Unit', width: '120px' },
+            { type: 'text', title: 'Nama', width: '200px' }
           ]
         }
         let spreadsheet = jexcel(this.$el, options)
