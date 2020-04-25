@@ -18,9 +18,9 @@ export default {
   // name: 'App',
   data() {
     return {
-      dataDasar: [],
+      aspek: [],
       form: {
-        nama: 'New Data'
+        aspek: 'New Data'
       }
     }
   },
@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     load() {
-      axios.get(host + 'api/datadasar/').then(res => {
+      axios.get(host + 'api/aspekk/').then(res => {
         console.log(res.data)
         var jexcelOptions = {
           data: res.data,
@@ -40,10 +40,8 @@ export default {
           responsive: true,
           columns: [
             { type: 'hidden', title: 'id', width: '10px' },
-            { type: 'text', title: 'Nama', width: '500px' },
-            { type: 'text', title: 'Create Date', width: '175px', readOnly: true },
-            { type: 'text', title: 'Last Update', width: '175px', readOnly: true },
-            { type: 'text', title: 'Expired Date', width: '175px' }
+            { type: 'text', title: 'Aspek', width: '200px' },
+            { type: 'text', title: 'Komponen Aspek', width: '250px' }
           ]
         }
         let spreadsheet = jexcel(this.$el, jexcelOptions)
@@ -51,32 +49,30 @@ export default {
       })
     },
     newRow() {
-      axios.post(host + 'api/datadasar/', this.form).then(res => {
+      axios.post(host + 'api/aspekk/', this.form).then(res => {
         console.log(res.data)
       })
     },
     updateRow(instance, cell, columns, row, value) {
-      axios.get(host + 'api/datadasar/').then(res => {
+      axios.get(host + 'api/aspekk/').then(res => {
         var index = Object.values(res.data[row])
         index[columns] = value
         console.log(index)
-        axios.put(host + 'api/datadasar/' + index[0], {
+        axios.put(host + 'api/aspekk/' + index[0], {
           id: index[0],
-          nama: index[1],
-          create_date: index[2],
-          last_update: index[3],
-          expired_date: index[4]
+          aspek: index[1],
+          komponen_aspek: index[2]
         }).then(res => {
           console.log(res.data)
         })
       })
     },
     deleteRow(instance, row) {
-      axios.get(host + 'api/datadasar/').then(res => {
+      axios.get(host + 'api/aspekk/').then(res => {
         var index = Object.values(res.data[row])
         // console.log(index)
         console.log(row)
-        axios.delete(host + 'api/datadasar/' + index[0])
+        axios.delete(host + 'api/aspekk/' + index[0])
       })
     }
   }

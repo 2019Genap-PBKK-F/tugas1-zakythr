@@ -1,7 +1,7 @@
 <template>
   <section class="content">
     <div class="row center-block">
-      <h1 class="text-center">Unit</h1>
+      <h1 class="text-center">Indikator Periode</h1>
       <input type="button" value="Add New Row" @click="() => spreadsheet.insertRow()" />
       <input type="button" value="Delete Selected Row" @click="() => spreadsheet.deleteRow()" />
       <div id="spreadsheet"></div>
@@ -13,48 +13,44 @@
 import jexcel from 'jexcel'
 import 'jexcel/dist/jexcel.css'
 import axios from 'axios'
-
 var update = function (obj, cel, y, x, val) {
   x = parseInt(x)
   y = parseInt(y)
   axios({
     method: 'get',
-    url: 'http://localhost:8026/api/Unit/'
+    url: 'http://localhost:8026/api/indikatorP/'
   }).then(response => {
     var data = Object.values(response.data[x])
     console.log(response.data)
     data[y] = val
     var tmpData = data
-    axios.put('http://localhost:8026/api/Unit/' + tmpData[0], {
-      id: tmpData[0],
-      KategoriUnit_id: tmpData[1],
-      nama: tmpData[2]
+    axios.put('http://localhost:8026/api/indikatorP/' + tmpData[0], {
+      id_master: tmpData[0],
+      id_periode: tmpData[1],
+      bobot: tmpData[2]
     }).then(response => {
       // console.log(response.data)
     })
   })
 }
-
 var deleterow = function(obj, x) {
   axios({
     method: 'get',
-    url: 'http://localhost:8026/api/Unit/'
+    url: 'http://localhost:8026/api/indikatorP/'
   }).then(response => {
     var index = Object.values(response.data[x])
     console.log(x)
-    axios.delete('http://localhost:8026/api/Unit/' + index[0])
+    axios.delete('http://localhost:8026/api/indikatorP/' + index[0])
   })
 }
-
 var newRow = function() {
   axios({
     method: 'post',
-    url: 'http://localhost:8026/api/Unit/'
+    url: 'http://localhost:8026/api/indikatorP/'
   }).then(response => {
     console.log(response.data)
   })
 }
-
 // var options = {
 //   data: data,
 //   url: 'http://localhost:3000/siswa/',
@@ -77,7 +73,6 @@ var newRow = function() {
 //     { type: 'checkbox', title: 'Aktif', width: '80px' }
 //   ]
 // }
-
 export default {
   name: 'App',
   mounted: function () {
@@ -99,7 +94,7 @@ export default {
   // },
   methods: {
     load() {
-      axios.get('http://localhost:8026/api/Unit/').then(response => {
+      axios.get('http://localhost:8026/api/indikatorP/').then(response => {
         console.log(response.data)
         var options = {
           data: response.data,
@@ -108,9 +103,9 @@ export default {
           ondeleterow: deleterow,
           allowToolbar: true,
           columns: [
-            { type: 'hidden', title: 'ID', width: '100px' },
-            { type: 'text', title: 'Kategori Unit', width: '120px' },
-            { type: 'text', title: 'Nama', width: '200px' }
+            { type: 'text', title: 'ID Master', width: '150px' },
+            { type: 'text', title: 'ID Periode', width: '150px' },
+            { type: 'text', title: 'Bobot', width: '100px' }
           ]
         }
         let spreadsheet = jexcel(this.$el, options)

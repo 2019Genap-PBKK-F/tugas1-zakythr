@@ -19,22 +19,58 @@
         <span class="page">Data Dasar</span>
       </a>
     </router-link>
-    <router-link tag="li" class="pageLink" to="/kategoriunit">
+    <router-link tag="li" class="pageLink" to="/aspek">
       <a>
         <i class="fa fa-list-alt"></i>
-        <span class="page">Kategori Unit</span>
+        <span class="page">Aspek</span>
       </a>
     </router-link>
-    <router-link tag="li" class="pageLink" to="/unit">
+    <router-link tag="li" class="pageLink" to="/masterindikator">
       <a>
         <i class="fa fa-list-alt"></i>
-        <span class="page">Unit</span>
+        <span class="page">Master Indikator</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/jenis_satker">
+      <a>
+        <i class="fa fa-list-alt"></i>
+        <span class="page">Jenis Satker</span>
       </a>
     </router-link>
     <router-link tag="li" class="pageLink" to="/capaian_unit">
       <a>
         <i class="fa fa-list-alt"></i>
         <span class="page">Capaian Unit</span>
+      </a>
+    </router-link>
+        <router-link tag="li" class="pageLink" to="/satuankerja">
+      <a>
+        <i class="fa fa-list-alt"></i>
+        <span class="page">Satuan Kerja</span>
+      </a>
+    </router-link>
+        <router-link tag="li" class="pageLink" to="/indikatorperiode">
+      <a>
+        <i class="fa fa-list-alt"></i>
+        <span class="page">indikator Periode</span>
+      </a>
+    </router-link>
+        <router-link tag="li" class="pageLink" to="/periode">
+      <a>
+        <i class="fa fa-list-alt"></i>
+        <span class="page">Periode</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/indikator_satuan">
+      <a>
+        <i class="fa fa-list-alt"></i>
+        <span class="page">Indikator Satuan Kerja</span>
+      </a>
+    </router-link>
+        <router-link tag="li" class="pageLink" to="/indikator_satuan_log">
+      <a>
+        <i class="fa fa-list-alt"></i>
+        <span class="page">Indikator Satuan Kerja Log</span>
       </a>
     </router-link>
 

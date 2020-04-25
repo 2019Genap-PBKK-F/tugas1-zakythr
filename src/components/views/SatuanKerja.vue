@@ -1,8 +1,7 @@
-
 <template>
   <section class="content">
     <div class="row center-block">
-      <h1 class="text-center">Capaian Unit</h1>
+      <h1 class="text-center">Satuan Kerja</h1>
       <input type="button" value="Add New Row" @click="() => spreadsheet.insertRow()" />
       <input type="button" value="Delete Selected Row" @click="() => spreadsheet.deleteRow()" />
       <div id="spreadsheet"></div>
@@ -19,17 +18,21 @@ var update = function (obj, cel, y, x, val) {
   y = parseInt(y)
   axios({
     method: 'get',
-    url: 'http://localhost:8026/api/capaian_unit/'
+    url: 'http://localhost:8026/api/satuankerja/'
   }).then(response => {
     var data = Object.values(response.data[x])
     console.log(response.data)
     data[y] = val
     var tmpData = data
-    axios.put('http://localhost:8026/api/capaian_unit/' + tmpData[0], {
-      id_satker: tmpData[0],
-      id_datadasar: tmpData[1],
-      waktu: tmpData[2],
-      capaian: tmpData[3]
+    axios.put('http://localhost:8026/api/satuankerja/' + tmpData[0], {
+      id: tmpData[0],
+      id_jns_satker: tmpData[1],
+      id_induk_satker: tmpData[2],
+      nama: tmpData[3],
+      email: tmpData[4],
+      create_date: tmpData[5],
+      last_update: tmpData[6],
+      expired_date: tmpData[7]
     }).then(response => {
       // console.log(response.data)
     })
@@ -38,17 +41,17 @@ var update = function (obj, cel, y, x, val) {
 var deleterow = function(obj, x) {
   axios({
     method: 'get',
-    url: 'http://localhost:8026/api/capaian_unit/'
+    url: 'http://localhost:8026/api/satuankerja/'
   }).then(response => {
     var index = Object.values(response.data[x])
     console.log(x)
-    axios.delete('http://localhost:8026/api/capaian_unit/' + index[0])
+    axios.delete('http://localhost:8026/api/satuankerja/' + index[0])
   })
 }
 var newRow = function() {
   axios({
     method: 'post',
-    url: 'http://localhost:8026/api/capaian_unit/'
+    url: 'http://localhost:8026/api/satuankerja/'
   }).then(response => {
     console.log(response.data)
   })
@@ -96,7 +99,7 @@ export default {
   // },
   methods: {
     load() {
-      axios.get('http://localhost:8026/api/capaian_unit/').then(response => {
+      axios.get('http://localhost:8026/api/satuankerja/').then(response => {
         console.log(response.data)
         var options = {
           data: response.data,
@@ -105,10 +108,14 @@ export default {
           ondeleterow: deleterow,
           allowToolbar: true,
           columns: [
-            { type: 'text', title: 'Id Satker', width: '120px' },
-            { type: 'text', title: 'Id Datadasar', width: '120px' },
-            { type: 'text', title: 'Waktu', width: '200px' },
-            { type: 'text', title: 'Capaian', width: '200px' }
+            { type: 'hidden', title: 'ID', width: '100px' },
+            { type: 'text', title: 'ID Jenis Satker', width: '120px' },
+            { type: 'text', title: 'ID Induk Satker', width: '120px' },
+            { type: 'text', title: 'Nama', width: '200px' },
+            { type: 'text', title: 'Email', width: '180px' },
+            { type: 'text', title: 'Create Date', width: '200px' },
+            { type: 'text', title: 'Last Update', width: '200px' },
+            { type: 'text', title: 'Eexpired Date', width: '200px' }
           ]
         }
         let spreadsheet = jexcel(this.$el, options)
