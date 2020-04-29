@@ -1,121 +1,91 @@
 <template>
-  <section class="content">
-    <div class="row center-block">
-      <h1 class="text-center">Jenis Satker</h1>
-      <input type="button" value="Add New Row" @click="() => spreadsheet.insertRow()" />
-      <input type="button" value="Delete Selected Row" @click="() => spreadsheet.deleteRow()" />
-      <div id="spreadsheet"></div>
+  <div>
+    <div id="app" ref="spreadsheet"></div>
+    <div>
+        <input class="btn btn-primary tambah" type="button" value="Add New Row" @click="() => spreadsheet.insertRow()" />
+        <input class="btn btn-primary tambah" type="button" value="Delete Selected Row" @click="() => spreadsheet.deleteRow()" />
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
 import jexcel from 'jexcel'
 import 'jexcel/dist/jexcel.css'
 import axios from 'axios'
-var update = function (obj, cel, y, x, val) {
-  x = parseInt(x)
-  y = parseInt(y)
-  axios({
-    method: 'get',
-    url: 'http://localhost:8026/api/jenis_satker/'
-  }).then(response => {
-    var data = Object.values(response.data[x])
-    console.log(response.data)
-    data[y] = val
-    var tmpData = data
-    axios.put('http://localhost:8026/api/jenis_satker/' + tmpData[0], {
-      id: tmpData[0],
-      nama: tmpData[1],
-      create_date: tmpData[2],
-      last_update: tmpData[3],
-      expired_date: tmpData[4]
-    }).then(response => {
-      // console.log(response.data)
-    })
-  })
-}
-var deleterow = function(obj, x) {
-  axios({
-    method: 'get',
-    url: 'http://localhost:8026/api/jenis_satker/'
-  }).then(response => {
-    var index = Object.values(response.data[x])
-    console.log(x)
-    axios.delete('http://localhost:8026/api/jenis_satker/' + index[0])
-  })
-}
-var newRow = function() {
-  axios({
-    method: 'post',
-    url: 'http://localhost:8026/api/jenis_satker/'
-  }).then(response => {
-    console.log(response.data)
-  })
-}
-// var options = {
-//   data: data,
-//   url: 'http://localhost:3000/siswa/',
-//   onchange: update,
-//   oninsertrow: newRow,
-//   ondeleterow: deleterow,
-//   defaultColWidth: 100,
-//   tableOverflow: true,
-//   tableWidth: '1000px',
-//   allowToolbar: false,
-//   allowInsertRow: true,
-//   allowDeleteRow: true,
-//   columns: [
-//     { type: 'hidden', title: 'ID', width: '80px' },
-//     { type: 'text', title: 'NRP', width: '200px' },
-//     { type: 'text', title: 'Nama', width: '250px' },
-//     { type: 'text', title: 'Angkatan', width: '100px' },
-//     { type: 'calendar', title: 'Tanggal Lahir', width: '120px' },
-//     { type: 'image', title: 'Photo', width: '120px' },
-//     { type: 'checkbox', title: 'Aktif', width: '80px' }
-//   ]
-// }
+// var host = 'http://10.199.14.46:8018/'
+var host = 'http://localhost:8026/'
 export default {
-  name: 'App',
-  mounted: function () {
+  // name: 'App',
+  data() {
+    return {
+      jenissatker: [],
+      form: {
+        nama: 'New Data'
+      }
+    }
+  },
+  mounted() {
     this.load()
   },
-  // data() {
-  //   return {
-  //     siswa: [],
-  //     form: {
-  //       id: '',
-  //       nrp: '',
-  //       nama: '',
-  //       angkatan: '',
-  //       tgl_lahir: '',
-  //       foto: '',
-  //       aktif: ''
-  //     }
-  //   }
-  // },
   methods: {
     load() {
-      axios.get('http://localhost:8026/api/jenis_satker/').then(response => {
-        console.log(response.data)
-        var options = {
-          data: response.data,
-          onchange: update,
-          oninsertrow: newRow,
-          ondeleterow: deleterow,
+      axios.get(host + 'api/jenissatker/').then(res => {
+        console.log(res.data)
+        var jexcelOptions = {
+          data: res.data,
           allowToolbar: true,
+          onchange: this.updateRow,
+          oninsertrow: this.newRow,
+          ondeleterow: this.deleteRow,
+          responsive: true,
           columns: [
-            { type: 'hidden', title: 'ID', width: '100px' },
-            { type: 'text', title: 'Nama', width: '200px' },
-            { type: 'text', title: 'Create Date', width: '200px' },
-            { type: 'text', title: 'Last Update', width: '200px' },
-            { type: 'text', title: 'Eexpired Date', width: '200px' }
+            { type: 'hidden', title: 'id', width: '10px' },
+            { type: 'text', title: 'Nama', width: '500px' },
+            { type: 'text', title: 'Create Date', width: '175px', readOnly: true },
+            { type: 'text', title: 'Last Update', width: '175px', readOnly: true },
+            { type: 'text', title: 'Expired Date', width: '175px' }
           ]
         }
-        let spreadsheet = jexcel(this.$el, options)
+        let spreadsheet = jexcel(this.$el, jexcelOptions)
         Object.assign(this, { spreadsheet })
+      })
+    },
+    newRow() {
+      axios.post(host + 'api/jenissatker/', this.form).then(res => {
+        console.log(res.data)
+      })
+    },
+    updateRow(instance, cell, columns, row, value) {
+      axios.get(host + 'api/jenissatker/').then(res => {
+        var index = Object.values(res.data[row])
+        index[columns] = value
+        console.log(index)
+        axios.put(host + 'api/jenissatker/' + index[0], {
+          id: index[0],
+          nama: index[1],
+          create_date: index[2],
+          last_update: index[3],
+          expired_date: index[4]
+        }).then(res => {
+          console.log(res.data)
+        })
+      })
+    },
+    deleteRow(instance, row) {
+      axios.get(host + 'api/jenissatker/').then(res => {
+        var index = Object.values(res.data[row])
+        // console.log(index)
+        console.log(row)
+        axios.delete(host + 'api/jenissatker/' + index[0])
       })
     }
   }
 }
 </script>
+<style>
+  .tambah {
+    margin-top: 10pt;
+    margin-bottom: 10pt;
+    margin-left: 10pt;
+    }
+</style>

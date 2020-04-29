@@ -63,7 +63,7 @@ const routes = [
         name: 'Periode',
         meta: {description: 'Periode Unit in CoPilot'}
       }, {
-        path: 'indikatorP',
+        path: 'indikatorperiode',
         component: IndikatorPeriodeView,
         name: 'IndikatorPeriode',
         meta: {description: 'Indikator Periode Unit in CoPilot'}

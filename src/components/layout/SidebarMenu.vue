@@ -31,7 +31,7 @@
         <span class="page">Master Indikator</span>
       </a>
     </router-link>
-    <router-link tag="li" class="pageLink" to="/jenis_satker">
+    <router-link tag="li" class="pageLink" to="/jenissatker">
       <a>
         <i class="fa fa-list-alt"></i>
         <span class="page">Jenis Satker</span>
@@ -52,7 +52,7 @@
         <router-link tag="li" class="pageLink" to="/indikatorperiode">
       <a>
         <i class="fa fa-list-alt"></i>
-        <span class="page">indikator Periode</span>
+        <span class="page">Indikator Periode</span>
       </a>
     </router-link>
         <router-link tag="li" class="pageLink" to="/periode">
