@@ -13,6 +13,44 @@
         <span class="page">Excel</span>
       </a>
     </router-link>
+    <router-link tag="li" class="pageLink" to="/abmas">
+      <a>
+        <i class="fa fa-list-alt"></i>
+        <span class="page">Abmas</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/dosen">
+      <a>
+        <i class="fa fa-list-alt"></i>
+        <span class="page">Dosen</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/penelitian">
+      <a>
+        <i class="fa fa-list-alt"></i>
+        <span class="page">Penelitian</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/publikasi">
+      <a>
+        <i class="fa fa-list-alt"></i>
+        <span class="page">Publikasi</span>
+      </a>
+    </router-link>
+
+    <li class="header">ME</li>
+    <router-link tag="li" class="pageLink" to="/tasks">
+      <a>
+        <i class="fa fa-tasks"></i>
+        <span class="page">Tasks</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/setting">
+      <a>
+        <i class="fa fa-cog"></i>
+        <span class="page">Settings</span>
+      </a>
+    </router-link>
     <router-link tag="li" class="pageLink" to="/datadasar">
       <a>
         <i class="fa fa-list-alt"></i>
@@ -67,52 +105,12 @@
         <span class="page">Indikator Satuan Kerja</span>
       </a>
     </router-link>
-        <router-link tag="li" class="pageLink" to="/indikator_satuan_log">
+    <router-link tag="li" class="pageLink" to="/indikator_satuan_log">
       <a>
         <i class="fa fa-list-alt"></i>
         <span class="page">Indikator Satuan Kerja Log</span>
       </a>
     </router-link>
-
-    <li class="header">ME</li>
-    <router-link tag="li" class="pageLink" to="/tasks">
-      <a>
-        <i class="fa fa-tasks"></i>
-        <span class="page">Tasks</span>
-      </a>
-    </router-link>
-    <router-link tag="li" class="pageLink" to="/setting">
-      <a>
-        <i class="fa fa-cog"></i>
-        <span class="page">Settings</span>
-      </a>
-    </router-link>
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-folder-o"></i>
-        <span class="treeview-title">Files</span>
-        <span class="pull-right-container pull-right">
-          <i class="fa fa-angle-left fa-fw"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li>
-          <a href="#">
-            <i class="fa fa-file-word-o"></i> Item 1
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-file-picture-o"></i> Item 2
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-file-pdf-o"></i> Item 3
-          </a>
-        </li>
-      </ul>
-    </li>
 
     <li class="header">LOGS</li>
     <router-link tag="li" class="pageLink" to="/access">

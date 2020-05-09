@@ -18,6 +18,10 @@ import PeriodeView from './components/views/Periode.vue'
 import IndikatorSatuanView from './components/views/Indikator_SatuanKerja.vue'
 import IndikatorSatuanLogView from './components/views/Indikator_SatuanKerja_Log.vue'
 import DataDasarView from './components/views/DataDasar.vue'
+import AbmasView from './components/views/abmas.vue'
+import DosenView from './components/views/dosen.vue'
+import PenelitianView from './components/views/penelitian.vue'
+import PublikasiView from './components/views/publikasi.vue'
 import AspekView from './components/views/Aspek.vue'
 import CapaianUnitView from './components/views/Capaian_Unit.vue'
 
@@ -87,6 +91,26 @@ const routes = [
         component: DataDasarView,
         name: 'DataDasar',
         meta: {description: 'Data Dasar Unit in CoPilot'}
+      }, {
+        path: 'abmas',
+        component: AbmasView,
+        name: 'Abmas',
+        meta: {description: 'Abmas Unit in CoPilot'}
+      }, {
+        path: 'dosen',
+        component: DosenView,
+        name: 'Dosen',
+        meta: {description: 'Dosen Unit in CoPilot'}
+      }, {
+        path: 'penelitian',
+        component: PenelitianView,
+        name: 'Penelitian',
+        meta: {description: 'Penelitian Unit in CoPilot'}
+      }, {
+        path: 'publikasi',
+        component: PublikasiView,
+        name: 'Publikasi',
+        meta: {description: 'Publikasi Unit in CoPilot'}
       }, {
         path: 'aspek',
         component: AspekView,
