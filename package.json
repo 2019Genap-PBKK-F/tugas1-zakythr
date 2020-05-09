@@ -29,7 +29,7 @@
     "hideseek": "^0.7.0",
     "http-server": "^0.9.0",
     "jexcel": "^3.9.1",
-    "jquery": "^2.2.2",
+    "jquery": "^3.5.0",
     "moment": "^2.12.0",
     "mongodb": "^3.5.3",
     "vue": "^2.2.2",
