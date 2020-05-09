@@ -54,7 +54,7 @@ export default {
     this.webdatarocks = new WebDataRocks({
       container: this.$el,
       toolbar: true,
-      height: 395,
+      height: 500,
       report: {
         dataSource: {
           dataSourceType: 'json',
